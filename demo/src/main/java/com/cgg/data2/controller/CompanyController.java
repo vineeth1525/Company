@@ -3,6 +3,8 @@ package com.cgg.data2.controller;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.validation.executable.ValidateOnExecution;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -18,6 +20,7 @@ import com.cgg.data2.exception.ServiceException;
 import com.cgg.data2.service.CompanyService;
 
 @RestController
+@ValidateOnExecution
 @RequestMapping("company")
 
 public class CompanyController {
@@ -30,11 +33,13 @@ public class CompanyController {
 
 	@Autowired
 	CompanyService companyService;
-
+//@Value("${url}")
+//public static String url;
 
 	@GetMapping("/get")
 	public List<EmployeeDto> getAllEmployees() {
-		EmployeeDto[] emp = restTemplate.getForObject("http://localhost:8080/employee/getAllEmployee", EmployeeDto[].class);
+	EmployeeDto[] emp = restTemplate.getForObject("http://localhost:8080/employee/getAllEmployee", EmployeeDto[].class);
+		
 		return Arrays.asList(emp);
 	}
 

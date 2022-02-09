@@ -8,6 +8,7 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableFeignClients
+
 public class DemoApplication {
 
 	public static void main(String[] args) {
