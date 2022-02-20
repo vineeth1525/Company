@@ -18,6 +18,7 @@ import com.cgg.data2.VO.EmployeeDto;
 import com.cgg.data2.client.EmployeeClient;
 import com.cgg.data2.exception.ServiceException;
 import com.cgg.data2.service.CompanyService;
+import com.cgg.data2.utils.CommonContants;
 
 @RestController
 @ValidateOnExecution
@@ -37,15 +38,17 @@ public class CompanyController {
 //public static String url;
 
 	@GetMapping("/get")
+	
 	public List<EmployeeDto> getAllEmployees() {
-	EmployeeDto[] emp = restTemplate.getForObject("http://localhost:8080/employee/getAllEmployee", EmployeeDto[].class);
-		
+		EmployeeDto[] emp = 
+				restTemplate.getForObject(CommonContants.RESTTEMPLATE_URL, EmployeeDto[].class);
+
 		return Arrays.asList(emp);
 	}
 
 	@GetMapping("/getAllEmployees-feign")
 
-	public ResponseEntity<List<EmployeeDto>> getAllEmployeesUsingFeign() throws ServiceException {
+	public List<EmployeeDto> getAllEmployeesUsingFeign() throws ServiceException {
 		return employeeClient.getEmployeeList();
 	}
 }
