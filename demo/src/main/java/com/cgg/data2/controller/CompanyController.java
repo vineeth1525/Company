@@ -42,7 +42,7 @@ public class CompanyController {
 	public List<EmployeeDto> getAllEmployees() {
 		EmployeeDto[] emp = 
 				restTemplate.getForObject(CommonContants.RESTTEMPLATE_URL, EmployeeDto[].class);
-
+System.out.println("hi");
 		return Arrays.asList(emp);
 	}
 
