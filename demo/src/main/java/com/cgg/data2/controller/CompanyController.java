@@ -46,6 +46,7 @@ public class CompanyController {
 	
 	@CircuitBreaker(name ="COMPANY_SERVICE",fallbackMethod = "getAllEmployeesFallback")
 	public List<EmployeeDto> getAllEmployees() {
+		System.out.println("hi from sub");
 		System.out.println("hey from second branch");
 		EmployeeDto[] emp = 
 				restTemplate.getForObject(CommonContants.RESTTEMPLATE_URL, EmployeeDto[].class);
