@@ -1,4 +1,4 @@
-package com.cgg.data2;
+	package com.cgg.data2;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;

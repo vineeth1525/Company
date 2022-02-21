@@ -2,6 +2,8 @@ package com.cgg.data2.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.validation.executable.ValidateOnExecution;
 
@@ -20,6 +22,8 @@ import com.cgg.data2.exception.ServiceException;
 import com.cgg.data2.service.CompanyService;
 import com.cgg.data2.utils.CommonContants;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+
 @RestController
 @ValidateOnExecution
 @RequestMapping("company")
@@ -37,15 +41,28 @@ public class CompanyController {
 //@Value("${url}")
 //public static String url;
 
+	public static final String COMPANY_SERVICE ="companyService";
 	@GetMapping("/get")
 	
+	@CircuitBreaker(name ="COMPANY_SERVICE",fallbackMethod = "getAllEmployeesFallback")
 	public List<EmployeeDto> getAllEmployees() {
 		EmployeeDto[] emp = 
 				restTemplate.getForObject(CommonContants.RESTTEMPLATE_URL, EmployeeDto[].class);
 
 		return Arrays.asList(emp);
 	}
+	public List<EmployeeDto> getAllEmployeesFallback(Exception e){
+		return Stream.of(
+		new EmployeeDto("hey","hello",2500,2),
+		new EmployeeDto("hey","hello",2500,2),
+		new EmployeeDto("hey","hello",2500,2),		
+		new EmployeeDto("hey","hello",2500,2)
 
+		).collect(Collectors.toList());
+		}
+
+
+	
 	@GetMapping("/getAllEmployees-feign")
 
 	public List<EmployeeDto> getAllEmployeesUsingFeign() throws ServiceException {
