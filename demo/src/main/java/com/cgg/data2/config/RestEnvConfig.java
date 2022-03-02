@@ -11,25 +11,25 @@ import org.springframework.stereotype.Component;
 public class RestEnvConfig {
 
 
-
-@Value(value = "${url}")
-String configEnv;
-
-
-
-
-
-public String getConfigEnv() {
-return configEnv;
-}
+//
+//@Value(value = "${url}")
+//String configEnv;
 
 
 
 
-
-public void setConfigEnv(String configEnv) {
-this.configEnv = configEnv;
-}
+//
+//public String getConfigEnv() {
+//return configEnv;
+//}
+//
+//
+//
+//
+//
+//public void setConfigEnv(String configEnv) {
+//this.configEnv = configEnv;
+//}
 
 
 
